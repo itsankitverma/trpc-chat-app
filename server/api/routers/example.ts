@@ -5,9 +5,7 @@ export const exampleRouter = createTRPCRouter({
   hello: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
-      const userRef = ctx.firestore
-        .collection("chat")
-        .doc("102148689601115781018");
+      const userRef = ctx.firestore.collection("chat").doc(input.id);
 
       const record = await userRef.get();
 
@@ -17,9 +15,6 @@ export const exampleRouter = createTRPCRouter({
       };
     }),
 
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!";
-  }),
   testMutate: publicProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
@@ -29,6 +24,7 @@ export const exampleRouter = createTRPCRouter({
         {
           id: input.id,
           name: ctx.session?.user.name,
+          message: "got it ankit",
         },
         {
           merge: true,
