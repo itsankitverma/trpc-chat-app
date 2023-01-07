@@ -10,7 +10,8 @@ export const authOptions: NextAuthOptions = {
       clientSecret: "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",
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,
+  secret:
+    "process.env.NEXTAUTH_SECRET!askbdjsdhgfbdbgfibdifgbi@@@ksldfsdigsgno",
   pages: {
     signIn: "/auth/signin",
   },
@@ -34,6 +35,7 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     jwt: async ({ user, token }) => {
+      console.log("token", token);
       if (user) {
         token.uid = user.id;
       }

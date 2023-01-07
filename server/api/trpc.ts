@@ -37,6 +37,7 @@ type CreateContextOptions = {
 const createInnerTRPCContext = async (opts: CreateContextOptions) => {
   return {
     session: opts.session,
+    firestore: admin.firestore(),
   };
 };
 
@@ -64,6 +65,7 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
  */
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
+import admin from "./routers/firebaseAdmin";
 
 const t = initTRPC
   .context<Awaited<ReturnType<typeof createTRPCContext>>>()
