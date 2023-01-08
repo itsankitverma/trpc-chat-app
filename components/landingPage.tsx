@@ -55,16 +55,6 @@ export default function LandingPage() {
                   <label htmlFor="email" className="sr-only">
                     Login to continue
                   </label>
-
-                  <button
-                    type="submit"
-                    className="mt-3 w-full rounded-md border border-transparent bg-gray-800 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:inline-flex sm:w-auto sm:flex-shrink-0 sm:items-center"
-                    onClick={() => {
-                      signIn();
-                    }}
-                  >
-                    Login
-                  </button>
                 </form>
               </div>
             </div>
