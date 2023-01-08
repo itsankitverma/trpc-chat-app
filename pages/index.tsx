@@ -45,7 +45,7 @@ export default function Index() {
           </div>
         )}
         {status === "unauthenticated" && (
-          <div>
+          <div className="px-5">
             <LandingPage />
           </div>
         )}

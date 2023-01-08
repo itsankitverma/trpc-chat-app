@@ -36,12 +36,28 @@ const Appbar = () => {
                   alt=""
                 />
               </a>
-              <div className="-mr-2 flex items-center md:hidden">
-                <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                  <span className="sr-only">Open main menu</span>
-                  <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-                </Popover.Button>
+              <div
+                onClick={() => {
+                  signIn();
+                }}
+              >
+                {status === "unauthenticated" && (
+                  <a
+                    href="#"
+                    className="block w-full bg-gray-50 px-5 py-3 text-center font-medium text-indigo-600 hover:bg-gray-100"
+                  >
+                    Log in
+                  </a>
+                )}
               </div>
+              {status === "authenticated" && (
+                <div className="-mr-2 flex items-center md:hidden">
+                  <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                    <span className="sr-only">Open main menu</span>
+                    <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                  </Popover.Button>
+                </div>
+              )}
             </div>
             <div className="hidden md:ml-10 md:block md:space-x-10">
               {navigation.map((item) => (
@@ -136,14 +152,6 @@ const Appbar = () => {
                   </a>
                 ))}
               </div>
-              {status === "unauthenticated" && (
-                <a
-                  href="#"
-                  className="block w-full bg-gray-50 px-5 py-3 text-center font-medium text-indigo-600 hover:bg-gray-100"
-                >
-                  Log in
-                </a>
-              )}
             </div>
           </Popover.Panel>
         </Transition>

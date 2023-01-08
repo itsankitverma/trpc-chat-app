@@ -62,7 +62,7 @@ export default function SignIn({ providers }: any) {
                                 <span className="h-6 pt-[2px] pr-4">
                                   {getSignInIcon(providerName)}
                                 </span>
-                                <span>signInWith {providerName}</span>
+                                <span>SignIn With {providerName}</span>
                               </button>
                             </div>
                           );
