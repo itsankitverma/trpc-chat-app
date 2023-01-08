@@ -9,9 +9,9 @@ export const exampleRouter = createTRPCRouter({
 
       const record = await userRef.get();
 
-      const resume = record.data();
+      const user = record.data();
       return {
-        resume,
+        user,
       };
     }),
 

@@ -17,8 +17,6 @@ export default function SignIn({ providers }: any) {
     }
   }, [status]);
 
-  console.log('{status === "authenticated"', session, status);
-
   return (
     <div className="">
       {status === "authenticated" && (

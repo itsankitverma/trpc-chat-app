@@ -23,8 +23,20 @@ export const authOptions: NextAuthOptions = {
       const db = admin.firestore();
       const userRef = db.collection("chat").doc(user.id);
 
+      const emailSplit = user.email?.split("@")[0];
+      const handleName = `${emailSplit}_${Math.floor(
+        100000 + Math.random() * 900000
+      )}`;
+
+      const usernameRef = db.collection("username").doc(handleName);
+      await usernameRef.set({
+        userId: user.id,
+      });
       await userRef.set({
         name: user.name,
+        email: user.email,
+        handle: handleName,
+        image: user.image,
       });
       return true;
     },
@@ -35,7 +47,6 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     jwt: async ({ user, token }) => {
-      console.log("token", token);
       if (user) {
         token.uid = user.id;
       }

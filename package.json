@@ -9,6 +9,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.7",
+    "@heroicons/react": "^2.0.13",
+    "@tailwindcss/forms": "^0.5.3",
     "@tanstack/react-query": "^4.20.0",
     "@trpc/client": "^10.7.0",
     "@trpc/next": "^10.7.0",
@@ -20,7 +23,10 @@
     "next-auth": "^4.18.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-moment": "^1.1.2",
+    "recoil": "^0.7.6",
     "superjson": "1.9.1",
+    "uuid": "^9.0.0",
     "zod": "^3.20.2"
   },
   "devDependencies": {
@@ -28,6 +34,7 @@
     "@types/prettier": "^2.7.2",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
+    "@types/uuid": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
     "autoprefixer": "^10.4.7",
