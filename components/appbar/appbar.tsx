@@ -1,6 +1,6 @@
 import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import { api } from "../../utils/api";
@@ -8,8 +8,7 @@ import { api } from "../../utils/api";
 const Appbar = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const hello = api.example.hello.useQuery({ id: session?.user.id! });
-  const test = api.example.testMutate.useMutation();
+  const hello = api.example.hello.useQuery({ id: session?.user.id as string });
 
   const handle = hello.data?.user?.handle;
 

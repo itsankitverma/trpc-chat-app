@@ -20,7 +20,7 @@ const VisitedHandle = () => {
   });
 
   const messageList = api.user.getMessageList.useQuery({
-    id: session?.user.id!,
+    id: session?.user.id as string,
     handle: handle as string,
   });
   const sendMessage = api.message.message.useMutation();
@@ -54,7 +54,7 @@ const VisitedHandle = () => {
             {messageList.data?.map((item, id) => {
               const timestamp = item.messagedAt;
               const reviewedTime =
-                (timestamp?._seconds! + timestamp?._nanoseconds! * 0.00000001) *
+                (timestamp?._seconds + timestamp?._nanoseconds * 0.00000001) *
                 1000;
 
               const newDate = new Date(reviewedTime);
@@ -92,8 +92,8 @@ const VisitedHandle = () => {
               className="bg-blue-500 p-2 text-white"
               onClick={() => {
                 sendMessage.mutate({
-                  id: session?.user.id!,
-                  name: session?.user.name!,
+                  id: session?.user.id as string,
+                  name: session?.user.name as string,
                   message,
                   handle: handle as string,
                 });

@@ -9,7 +9,7 @@ export default function UpdateProfile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const currentUser = api.user.getCurrentUser.useQuery({
-    id: session?.user.id!,
+    id: session?.user.id as string,
   });
 
   const updated = () => toast("Details Updated.");
@@ -79,7 +79,7 @@ export default function UpdateProfile() {
           <button
             onClick={() => {
               updateProfile.mutate({
-                id: session?.user.id!,
+                id: session?.user.id as string,
                 name,
                 email,
               });
