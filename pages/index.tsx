@@ -1,11 +1,29 @@
+import { useRouter } from "next/router";
 import Appbar from "../components/appbar/appbar";
+import { api } from "../utils/api";
 
 export default function Index() {
+  const usersList = api.user.getAllUser.useQuery();
+  const router = useRouter();
+
+  console.log("usersList :>> ", usersList.data);
   return (
     <>
       <Appbar />
       <div className="relative overflow-hidden bg-white">
-        <div
+        <p>Registered Users</p>
+        {usersList.data?.map((user, id) => {
+          return (
+            <div
+              onClick={() => {
+                router.push(`${router.pathname}/p/${user.handle}`);
+              }}
+            >
+              {user.name}
+            </div>
+          );
+        })}
+        {/* <div
           className="hidden lg:absolute lg:inset-0 lg:block"
           aria-hidden="true"
         >
@@ -176,7 +194,7 @@ export default function Index() {
               </div>
             </div>
           </main>
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -22,6 +22,12 @@ export const userRouter = createTRPCRouter({
       return user;
     }),
 
+  getAllUser: publicProcedure.query(async ({ ctx }) => {
+    const snapRef = await ctx.firestore.collection("chat").get();
+
+    return snapRef.docs.map((doc) => doc.data());
+  }),
+
   getMessageList: publicProcedure
     .input(z.object({ handle: z.string(), id: z.string() }))
     .query(async ({ ctx, input }) => {

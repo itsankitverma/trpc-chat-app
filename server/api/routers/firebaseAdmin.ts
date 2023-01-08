@@ -1,6 +1,5 @@
 import * as admin from "firebase-admin";
 import { ServiceAccount } from "firebase-admin";
-// import serviceAccount from "../../../db.json";
 
 const serviceAccount = JSON.parse(
   process.env.ADMIN as string
