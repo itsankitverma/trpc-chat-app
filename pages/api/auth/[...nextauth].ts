@@ -5,13 +5,11 @@ import admin from "../../../server/api/routers/firebaseAdmin";
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
-      clientId:
-        "298328387675-02mg9lq3ttrvqiislpbmvq74e2brfuir.apps.googleusercontent.com",
-      clientSecret: "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",
+      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
     }),
   ],
-  secret:
-    "process.env.NEXTAUTH_SECRET!askbdjsdhgfbdbgfibdifgbi@@@ksldfsdigsgno",
+  secret: process.env.NEXT_PUBLIC_SECRET ?? "",
   pages: {
     signIn: "/auth/signin",
   },

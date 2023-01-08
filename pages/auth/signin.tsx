@@ -1,4 +1,4 @@
-import { GetServerSidePropsContext } from "next";
+import type { GetServerSidePropsContext } from "next";
 import { getProviders, signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -35,7 +35,7 @@ export default function SignIn({ providers }: any) {
                   {process.env.NEXT_PUBLIC_PRODUCT_NAME}
                 </p>
                 <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-                  signInAccount
+                  Sign In Using
                 </h2>
               </div>
 
