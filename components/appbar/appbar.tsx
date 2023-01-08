@@ -4,8 +4,6 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import { api } from "../../utils/api";
-import { useRecoilState } from "recoil";
-import { userState } from "../../state/state";
 
 const Appbar = () => {
   const { data: session, status } = useSession();
@@ -18,10 +16,10 @@ const Appbar = () => {
   const navigation = [{ name: "Dashboard", href: "/dashboard" }];
 
   return (
-    <div className="w-full">
+    <div className="mt-3 w-full md:mt-0">
       <Popover>
         <nav
-          className="relative mx-auto flex max-w-7xl items-center justify-between px-6"
+          className="relative mx-auto flex items-center justify-between px-6 md:max-w-7xl"
           aria-label="Global"
         >
           <div className="flex flex-1 items-center">

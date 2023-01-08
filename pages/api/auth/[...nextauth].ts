@@ -35,6 +35,7 @@ export const authOptions: NextAuthOptions = {
       await userRef.set({
         name: user.name,
         email: user.email,
+        id: user.id,
         handle: handleName,
         image: user.image,
       });

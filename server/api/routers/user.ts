@@ -28,6 +28,38 @@ export const userRouter = createTRPCRouter({
     return snapRef.docs.map((doc) => doc.data());
   }),
 
+  getCurrentUser: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const snapshot = await ctx.firestore.collection("chat").doc(input.id);
+      const record = await snapshot.get();
+      const user = record.data();
+
+      return user;
+    }),
+
+  updateUser: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        email: z.string(),
+        name: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userRef = ctx.firestore.collection("chat").doc(input.id);
+
+      await userRef.set(
+        {
+          name: input.name,
+          email: input.email,
+        },
+        {
+          merge: true,
+        }
+      );
+    }),
+
   getMessageList: publicProcedure
     .input(z.object({ handle: z.string(), id: z.string() }))
     .query(async ({ ctx, input }) => {

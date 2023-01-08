@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom } from "recoil";
 import { User } from "../data/model/UserInfo";
 import { v1 } from "uuid";
 
@@ -8,9 +8,9 @@ export const DEFAULT_USER_STATE: User = {
   name: "",
 };
 
-const userState = atom<User>({
+const userState = atom<boolean>({
   key: `userState/${v1()}`,
-  default: DEFAULT_USER_STATE,
+  default: false,
 });
 
 export { userState };
