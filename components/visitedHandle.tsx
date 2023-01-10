@@ -27,12 +27,12 @@ const VisitedHandle = () => {
 
   const placeholderAvatar = "/assets/placeholder-image.webp";
   return (
-    <div>
-      <div>
+    <div className="border- relative h-screen border-2">
+      <div className="">
         <div className="flex w-full  flex-col items-center justify-center">
           <Appbar />
 
-          <div className=" flex  items-center justify-between gap-2">
+          <div className="sticky top-0 z-10 flex w-full max-w-4xl items-center justify-between gap-2 bg-gray-200 px-2 py-5 md:px-7 ">
             <div className="flex items-center gap-2">
               <img
                 src={user.data?.image}
@@ -48,9 +48,9 @@ const VisitedHandle = () => {
                 <p>{user.data?.email}</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">...</div>
+            <div className="flex cursor-pointer items-center gap-2">...</div>
           </div>
-          <div className=" w-full max-w-4xl rounded-lg border-2 border-black">
+          <div className=" mt-3 w-full max-w-4xl rounded-lg ">
             {messageList.data?.map((item, id) => {
               const timestamp = item.messagedAt;
               const reviewedTime =
@@ -61,17 +61,20 @@ const VisitedHandle = () => {
               return (
                 <div key={id}>
                   <div
-                    className={`flex gap-2 border-b-2 border-black p-2 
-          ${
-            item?.senderId === session?.user.id
-              ? "justify-end"
-              : "justify-start"
-          }
-          `}
+                    className={`flex flex-col gap-2 border-b-2 border-gray-400 p-2 
+                    ${
+                      item?.senderId === session?.user.id
+                        ? "justify-end"
+                        : "justify-start"
+                    }
+                    `}
                   >
-                    <p className="">{item.message}</p>
+                    <p className="max-w-fit bg-gray-200 p-2">{item.message}</p>
                     <i>
-                      <Moment fromNow className="mt-2 pr-5 text-xs capitalize">
+                      <Moment
+                        fromNow
+                        className="relative -top-2 left-2 pr-5 text-xs capitalize"
+                      >
                         {newDate}
                       </Moment>
                     </i>
@@ -80,30 +83,30 @@ const VisitedHandle = () => {
               );
             })}
           </div>
-          <div className="mt-5">
-            <input
-              type="text"
-              value={message}
-              onChange={handleChange}
-              placeholder="Enter your message"
-              className=" p-2 pl-2"
-            />
-            <button
-              className="bg-blue-500 p-2 text-white"
-              onClick={() => {
-                sendMessage.mutate({
-                  id: session?.user.id as string,
-                  name: session?.user.name as string,
-                  message,
-                  handle: handle as string,
-                });
-                setMessage("");
-              }}
-            >
-              Submit
-            </button>
-          </div>
         </div>
+      </div>
+      <div className="sticky bottom-0 mt-5 flex w-full place-content-center gap-1 bg-white p-3">
+        <input
+          type="text"
+          value={message}
+          onChange={handleChange}
+          placeholder="Enter your message"
+          className=" w-full max-w-3xl rounded-lg border-2 border-black p-2 pl-2"
+        />
+        <button
+          className="rounded-lg bg-blue-500 p-2 text-white"
+          onClick={() => {
+            sendMessage.mutate({
+              id: session?.user.id as string,
+              name: session?.user.name as string,
+              message,
+              handle: handle as string,
+            });
+            setMessage("");
+          }}
+        >
+          Submit
+        </button>
       </div>
     </div>
   );
