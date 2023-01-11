@@ -58,10 +58,18 @@ const VisitedHandle = () => {
                 1000;
 
               const newDate = new Date(reviewedTime);
+
               return (
-                <div key={id}>
+                <div
+                  key={id}
+                  className={`flex flex-col ${
+                    item?.senderId === session?.user.id
+                      ? "justify-end"
+                      : "justify-start"
+                  } border-b-2 border-gray-400 p-2`}
+                >
                   <div
-                    className={`flex flex-col gap-2 border-b-2 border-gray-400 p-2 
+                    className={`flex gap-2  
                     ${
                       item?.senderId === session?.user.id
                         ? "justify-end"
@@ -70,15 +78,19 @@ const VisitedHandle = () => {
                     `}
                   >
                     <p className="max-w-fit bg-gray-200 p-2">{item.message}</p>
-                    <i>
-                      <Moment
-                        fromNow
-                        className="relative -top-2 left-2 pr-5 text-xs capitalize"
-                      >
-                        {newDate}
-                      </Moment>
-                    </i>
                   </div>
+                  <i>
+                    <Moment
+                      className={`flex flex-col ${
+                        item?.senderId === session?.user.id
+                          ? "items-end justify-end"
+                          : "items-start justify-start"
+                      }  p-2`}
+                      fromNow
+                    >
+                      {newDate}
+                    </Moment>
+                  </i>
                 </div>
               );
             })}
