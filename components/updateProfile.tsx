@@ -1,16 +1,22 @@
-import { useSession } from "next-auth/react";
-import { useState } from "react";
-import { api } from "../utils/api";
-import { ToastContainer, toast } from "react-toastify";
+import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 import { useRecoilState } from "recoil";
 import { userProfile } from "../state/state";
+import { useAutoSave } from "../lib/useAutoSave";
 
 export default function UpdateProfile() {
-  const updateProfile = api.user.updateUser.useMutation();
-  const { data: session } = useSession();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [user, setUser] = useRecoilState(userProfile);
+  const { handleAutoSave } = useAutoSave();
+
+  useEffect(() => {
+    handleAutoSave();
+  }, [user]);
+
+  const handleBlur = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {};
 
   return (
     <form className="space-y-8 divide-y divide-gray-200 md:px-40">
@@ -27,7 +33,7 @@ export default function UpdateProfile() {
           <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label
-                htmlFor="first-name"
+                htmlFor="name"
                 className="block text-sm font-medium text-gray-700"
               >
                 Display Name
@@ -35,12 +41,20 @@ export default function UpdateProfile() {
               <div className="mt-1">
                 <input
                   type="text"
-                  name="first-name"
+                  name="name"
                   defaultValue={user?.name}
                   onChange={(e) => {
-                    setName(e.target.value);
+                    // setName(e.target.value);
+                    const { id, value } = e.target;
+                    if (user) {
+                      setUser({
+                        ...user,
+                        [id]: value,
+                      });
+                    }
                   }}
-                  id="first-name"
+                  onBlur={handleBlur}
+                  id="name"
                   autoComplete="given-name"
                   className="block w-full rounded-md border-gray-300 px-3 py-2 pl-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
@@ -58,9 +72,17 @@ export default function UpdateProfile() {
                 <input
                   id="email"
                   name="email"
+                  onBlur={handleBlur}
                   defaultValue={user?.email}
                   onChange={(e) => {
-                    setEmail(e.target.value);
+                    // setEmail(e.target.value);
+                    const { id, value } = e.target;
+                    if (user) {
+                      setUser({
+                        ...user,
+                        [id]: value,
+                      });
+                    }
                   }}
                   type="email"
                   autoComplete="email"
@@ -72,24 +94,6 @@ export default function UpdateProfile() {
         </div>
       </div>
 
-      <div className="pt-5">
-        <div className="flex justify-end">
-          <button
-            onClick={() => {
-              updateProfile.mutate({
-                id: session?.user.id as string,
-                name,
-                email,
-              });
-              setUser({ ...user });
-            }}
-            type="submit"
-            className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          >
-            Save
-          </button>
-        </div>
-      </div>
       <ToastContainer />
     </form>
   );

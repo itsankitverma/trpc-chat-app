@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Appbar from "../../components/appbar/appbar";
 import VisitedHandle from "../../components/visitedHandle";
 import UpdateProfile from "../../components/updateProfile";
+import Layout from "../../components/layout/layout";
 
 export default function Handle() {
   const { data: session, status } = useSession();
@@ -23,7 +24,9 @@ export default function Handle() {
       <div>
         <Appbar />
         <div className="px-5 md:max-w-4xl">
-          <UpdateProfile />
+          <Layout>
+            <UpdateProfile />
+          </Layout>
         </div>
       </div>
     );
