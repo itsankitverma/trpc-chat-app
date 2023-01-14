@@ -12,12 +12,6 @@ export default function UpdateProfile() {
     handleAutoSave();
   }, [user]);
 
-  const handleBlur = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => {};
-
   return (
     <form className="space-y-8 divide-y divide-gray-200 md:px-40">
       <div className="space-y-8 divide-y divide-gray-200">
@@ -53,7 +47,6 @@ export default function UpdateProfile() {
                       });
                     }
                   }}
-                  onBlur={handleBlur}
                   id="name"
                   autoComplete="given-name"
                   className="block w-full rounded-md border-gray-300 px-3 py-2 pl-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -72,7 +65,6 @@ export default function UpdateProfile() {
                 <input
                   id="email"
                   name="email"
-                  onBlur={handleBlur}
                   defaultValue={user?.email}
                   onChange={(e) => {
                     // setEmail(e.target.value);
