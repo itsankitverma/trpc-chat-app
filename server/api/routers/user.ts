@@ -1,6 +1,6 @@
 import { z } from "zod";
+import type { User, UserList } from "../../../data/model/UserInfo";
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
-import admin from "./firebaseAdmin";
 
 export const userRouter = createTRPCRouter({
   getUser: publicProcedure
@@ -25,7 +25,7 @@ export const userRouter = createTRPCRouter({
   getAllUser: publicProcedure.query(async ({ ctx }) => {
     const snapRef = await ctx.firestore.collection("chat").get();
 
-    return snapRef.docs.map((doc) => doc.data());
+    return snapRef.docs.map((doc) => doc.data() as UserList);
   }),
 
   getCurrentUser: publicProcedure
@@ -35,7 +35,7 @@ export const userRouter = createTRPCRouter({
       const record = await snapshot.get();
       const user = record.data();
 
-      return user;
+      return user as User;
     }),
 
   updateUser: publicProcedure

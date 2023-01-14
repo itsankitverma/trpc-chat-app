@@ -2,17 +2,15 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { api } from "../utils/api";
 import { ToastContainer, toast } from "react-toastify";
+import { useRecoilState } from "recoil";
+import { userProfile } from "../state/state";
 
 export default function UpdateProfile() {
   const updateProfile = api.user.updateUser.useMutation();
   const { data: session } = useSession();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const currentUser = api.user.getCurrentUser.useQuery({
-    id: session?.user.id as string,
-  });
-
-  const updated = () => toast("Details Updated.");
+  const [user, setUser] = useRecoilState(userProfile);
 
   return (
     <form className="space-y-8 divide-y divide-gray-200 md:px-40">
@@ -38,7 +36,7 @@ export default function UpdateProfile() {
                 <input
                   type="text"
                   name="first-name"
-                  defaultValue={currentUser.data?.name}
+                  defaultValue={user?.name}
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
@@ -60,7 +58,7 @@ export default function UpdateProfile() {
                 <input
                   id="email"
                   name="email"
-                  defaultValue={currentUser.data?.email}
+                  defaultValue={user?.email}
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
@@ -83,6 +81,7 @@ export default function UpdateProfile() {
                 name,
                 email,
               });
+              setUser({ ...user });
             }}
             type="submit"
             className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"

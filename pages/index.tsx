@@ -1,25 +1,27 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
 import Appbar from "../components/appbar/appbar";
 import LandingPage from "../components/landingPage";
-import { api } from "../utils/api";
+import Layout from "../components/layout/layout";
+import { usersListState } from "../state/state";
 
 export default function Index() {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const usersList = api.user.getAllUser.useQuery();
+  const [list] = useRecoilState(usersListState);
 
   return (
-    <>
+    <Layout>
       <Appbar />
       <div className="relative flex flex-col items-center justify-center overflow-hidden bg-white">
         {status === "authenticated" && (
           <div>
             <p>Registered Users</p>
             <>
-              {usersList.data?.map((user) => (
+              {list.map((user) => (
                 <li
-                  key={user.email}
+                  key={user?.email}
                   className="flex cursor-pointer py-4"
                   onClick={() => {
                     router.push(`${router.pathname}/p/${user.handle}`);
@@ -50,6 +52,6 @@ export default function Index() {
           </div>
         )}
       </div>
-    </>
+    </Layout>
   );
 }

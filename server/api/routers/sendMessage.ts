@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
+import { createTRPCRouter, publicProcedure } from "../trpc";
 import admin from "./firebaseAdmin";
 
 export const messageRouter = createTRPCRouter({

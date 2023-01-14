@@ -15,7 +15,7 @@ const Appbar = () => {
   const navigation = [{ name: "Dashboard", href: "/dashboard" }];
 
   return (
-    <div className="mt-3 w-full md:mt-0">
+    <div className="mt-3 w-full py-2 md:mt-0">
       <Popover>
         <nav
           className="relative mx-auto flex items-center justify-between px-6 md:max-w-7xl"
@@ -28,15 +28,18 @@ const Appbar = () => {
                 onClick={() => {
                   router.push("/");
                 }}
+                className="flex items-center gap-2"
               >
                 <span className="sr-only">Your Company</span>
                 <img
                   className="h-8 w-auto sm:h-10"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                  src="/maskable_icon.png"
                   alt=""
                 />
+                <p>MessageVerse</p>
               </a>
               <div
+                className="flex md:hidden"
                 onClick={() => {
                   signIn();
                 }}
@@ -44,7 +47,7 @@ const Appbar = () => {
                 {status === "unauthenticated" && (
                   <a
                     href="#"
-                    className="block w-full bg-gray-50 px-5 py-3 text-center font-medium text-indigo-600 hover:bg-gray-100"
+                    className="rounded-lg bg-gray-100 px-3 py-2 hover:bg-gray-200"
                   >
                     Log in
                   </a>
@@ -59,48 +62,40 @@ const Appbar = () => {
                 </div>
               )}
             </div>
-            <div className="hidden md:ml-10 md:block md:space-x-10">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="font-medium text-gray-500 hover:text-gray-900"
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
-          </div>
-          <div
-            className="hidden text-right md:block"
-            onClick={() => {
-              signIn();
-            }}
-          >
-            {status === "unauthenticated" && (
-              <a
-                href="#"
-                className="block w-full bg-gray-50 px-5 py-3 text-center font-medium text-indigo-600 hover:bg-gray-100"
-              >
-                Log in
-              </a>
+            {status === "authenticated" && (
+              <div className="hidden md:ml-10 md:block md:space-x-10">
+                {navigation.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="font-medium text-gray-500 hover:text-gray-900"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
             )}
+          </div>
 
+          <div className="hidden text-right md:block">
             {status === "authenticated" && (
               <a
                 href={`/p/${handle}`}
                 target="_blank"
                 rel="noreferrer"
-                className="block w-full bg-gray-50 px-5 py-3 text-center font-medium text-indigo-600 hover:bg-gray-100"
+                className="flex w-full items-center gap-x-2 bg-gray-50 px-5 py-3 text-center font-medium text-indigo-600 hover:bg-gray-100"
               >
                 <img
                   src={session?.user.image as string}
                   alt=""
-                  className="h-10 w-10 rounded-full"
+                  className="h-8 w-8 rounded-full"
                   // onClick={() => {
                   //   router.push(`${router.pathname}/${handle}`);
                   // }}
                 />
+                <p className="text-gray-600">
+                  {session?.user.name?.split(" ")[0]}
+                </p>
               </a>
             )}
             <a
@@ -108,6 +103,17 @@ const Appbar = () => {
               className="inline-flex items-center rounded-md border border-transparent bg-white px-4 py-2 text-base font-medium text-indigo-600 hover:bg-gray-50"
             ></a>
           </div>
+          {status === "unauthenticated" && (
+            <a
+              href="#"
+              onClick={() => {
+                signIn();
+              }}
+              className="rounded-lg bg-gray-100 px-3 py-2 font-semibold hover:bg-gray-200"
+            >
+              Log in
+            </a>
+          )}
         </nav>
 
         <Transition
