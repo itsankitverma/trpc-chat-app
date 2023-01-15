@@ -5,9 +5,12 @@ import Appbar from "../../components/appbar/appbar";
 import VisitedHandle from "../../components/visitedHandle";
 import UpdateProfile from "../../components/updateProfile";
 import Layout from "../../components/layout/layout";
+import { userProfile } from "../../state/state";
+import { useRecoilState } from "recoil";
 
 export default function Handle() {
   const { data: session, status } = useSession();
+  const [userId] = useRecoilState(userProfile);
   const router = useRouter();
   const { handle } = router.query;
 
@@ -19,7 +22,7 @@ export default function Handle() {
     return "loading";
   }
 
-  if (user.data?.id === session?.user.id) {
+  if (user.data?.id === userId.id) {
     return (
       <div>
         <Appbar />

@@ -4,12 +4,13 @@ import { useRecoilState } from "recoil";
 import Appbar from "../components/appbar/appbar";
 import LandingPage from "../components/landingPage";
 import Layout from "../components/layout/layout";
-import { usersListState } from "../state/state";
+import { userProfile, usersListState } from "../state/state";
 
 export default function Index() {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [list] = useRecoilState(usersListState);
+  const [currentUser] = useRecoilState(userProfile);
 
   return (
     <Layout>
@@ -24,7 +25,9 @@ export default function Index() {
                   key={user?.email}
                   className="flex cursor-pointer py-4"
                   onClick={() => {
-                    router.push(`${router.pathname}/p/${user.handle}`);
+                    user.id === currentUser.id
+                      ? router.push(`/profile`)
+                      : router.push(`${router.pathname}/p/${user.handle}`);
                   }}
                 >
                   <img

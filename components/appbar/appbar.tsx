@@ -3,14 +3,14 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
-import { api } from "../../utils/api";
+import { useRecoilState } from "recoil";
+import { userProfile } from "../../state/state";
 
 const Appbar = () => {
   const { data: session, status } = useSession();
-  const router = useRouter();
-  const hello = api.example.hello.useQuery({ id: session?.user.id as string });
+  const [userId] = useRecoilState(userProfile);
 
-  const handle = hello.data?.user?.handle;
+  const router = useRouter();
 
   const navigation = [{ name: "Dashboard", href: "/dashboard" }];
 
@@ -80,9 +80,7 @@ const Appbar = () => {
           <div className="hidden text-right md:block">
             {status === "authenticated" && (
               <a
-                href={`/p/${handle}`}
-                target="_blank"
-                rel="noreferrer"
+                href={`/profile`}
                 className="flex w-full items-center gap-x-2 bg-gray-50 px-5 py-3 text-center font-medium text-indigo-600 hover:bg-gray-100"
               >
                 <img
@@ -132,7 +130,7 @@ const Appbar = () => {
             <div className="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5">
               <div className="flex items-center justify-between px-5 pt-4">
                 <div>
-                  <a href={`/p/${handle}`} target="_blank" rel="noreferrer">
+                  <a href={`/profile`}>
                     <img
                       src={session?.user.image as string}
                       alt=""

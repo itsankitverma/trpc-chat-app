@@ -2,28 +2,32 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Moment from "react-moment";
+import { useRecoilState } from "recoil";
+import { userProfile } from "../state/state";
 import { api } from "../utils/api";
 import Appbar from "./appbar/appbar";
 
 const VisitedHandle = () => {
   const [message, setMessage] = useState("");
+  const [userId] = useRecoilState(userProfile);
+
   const { data: session } = useSession();
   const router = useRouter();
   const { handle } = router.query;
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMessage(e.target.value);
-  };
 
   const user = api.user.getUser.useQuery({
     handle: handle as string,
   });
 
   const messageList = api.user.getMessageList.useQuery({
-    id: session?.user.id as string,
+    id: userId.id,
     handle: handle as string,
   });
   const sendMessage = api.message.message.useMutation();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
+  };
 
   const placeholderAvatar = "/assets/placeholder-image.webp";
   return (
