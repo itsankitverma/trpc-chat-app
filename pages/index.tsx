@@ -2,8 +2,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import Appbar from "../components/appbar/appbar";
+import Navbar from "../components/appbar/navbar";
 import LandingPage from "../components/landingPage";
-import Layout from "../components/layout/layout";
 import { userProfile, usersListState } from "../state/state";
 
 export default function Index() {
@@ -13,8 +13,7 @@ export default function Index() {
   const [currentUser] = useRecoilState(userProfile);
 
   return (
-    <Layout>
-      <Appbar />
+    <>
       <div className="relative flex flex-col items-center justify-center overflow-hidden bg-white">
         {status === "authenticated" && (
           <div>
@@ -55,6 +54,6 @@ export default function Index() {
           </div>
         )}
       </div>
-    </Layout>
+    </>
   );
 }

@@ -7,7 +7,7 @@ const Settings = () => {
 
   return (
     <div className="md:ml-64">
-      <Appbar />
+      {/* <Appbar /> */}
       {status === "authenticated" && (
         <button
           className="flex max-w-fit cursor-pointer items-center gap-2 rounded-lg bg-red-500 p-2 text-white"

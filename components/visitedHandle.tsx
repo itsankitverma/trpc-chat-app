@@ -34,8 +34,6 @@ const VisitedHandle = () => {
     <div className="border- relative h-screen border-2">
       <div className="">
         <div className="flex w-full  flex-col items-center justify-center">
-          <Appbar />
-
           <div className="sticky top-0 z-10 flex w-full max-w-4xl items-center justify-between gap-2 bg-gray-200 px-2 py-5 md:px-7 ">
             <div className="flex items-center gap-2">
               <img

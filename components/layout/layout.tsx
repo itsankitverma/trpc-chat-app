@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { userProfile, usersListState } from "../../state/state";
 import { api } from "../../utils/api";
+import Navbar from "../appbar/navbar";
 
 export interface LayoutProps {
   children: React.ReactNode;
@@ -35,7 +36,12 @@ const Layout = ({ children }: LayoutProps) => {
     }
   }, [user, list]);
 
-  return <div>{children}</div>;
+  return (
+    <div>
+      <Navbar />
+      <div>{children}</div>
+    </div>
+  );
 };
 
 export default Layout;

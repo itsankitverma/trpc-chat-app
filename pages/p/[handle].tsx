@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import Appbar from "../../components/appbar/appbar";
 import VisitedHandle from "../../components/visitedHandle";
 import UpdateProfile from "../../components/updateProfile";
-import Layout from "../../components/layout/layout";
 import { userProfile } from "../../state/state";
 import { useRecoilState } from "recoil";
 
@@ -25,11 +24,9 @@ export default function Handle() {
   if (user.data?.id === userId.id) {
     return (
       <div>
-        <Appbar />
+        {/* <Appbar /> */}
         <div className="px-5 md:max-w-4xl">
-          <Layout>
-            <UpdateProfile />
-          </Layout>
+          <UpdateProfile />
         </div>
       </div>
     );
