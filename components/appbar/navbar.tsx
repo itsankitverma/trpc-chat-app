@@ -55,7 +55,7 @@ export default function Navbar() {
                       src="/maskable_icon.png"
                       alt="Your Company"
                     />
-                    <p>Message Verse</p>
+                    <p className="hidden md:block">Message Verse</p>
                   </div>
                 </div>
                 {status === "authenticated" && (
