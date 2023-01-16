@@ -3,12 +3,9 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
-import { useRecoilState } from "recoil";
-import { userProfile } from "../../state/state";
 
 const Appbar = () => {
   const { data: session, status } = useSession();
-  const [userId] = useRecoilState(userProfile);
 
   const router = useRouter();
 

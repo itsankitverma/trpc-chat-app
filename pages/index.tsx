@@ -1,8 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
-import Appbar from "../components/appbar/appbar";
-import Navbar from "../components/appbar/navbar";
 import LandingPage from "../components/landingPage";
 import { userProfile, usersListState } from "../state/state";
 

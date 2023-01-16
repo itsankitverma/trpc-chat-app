@@ -1,6 +1,5 @@
 import { signOut, useSession } from "next-auth/react";
 import React from "react";
-import Appbar from "../components/appbar/appbar";
 
 const Settings = () => {
   const { data: session, status } = useSession();

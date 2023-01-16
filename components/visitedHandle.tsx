@@ -5,7 +5,6 @@ import Moment from "react-moment";
 import { useRecoilState } from "recoil";
 import { userProfile } from "../state/state";
 import { api } from "../utils/api";
-import Appbar from "./appbar/appbar";
 
 const VisitedHandle = () => {
   const [message, setMessage] = useState("");

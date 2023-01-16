@@ -1,7 +1,6 @@
 import { useSession } from "next-auth/react";
 import { api } from "../../utils/api";
 import { useRouter } from "next/router";
-import Appbar from "../../components/appbar/appbar";
 import VisitedHandle from "../../components/visitedHandle";
 import UpdateProfile from "../../components/updateProfile";
 import { userProfile } from "../../state/state";
