@@ -36,7 +36,7 @@ const Appbar = () => {
                   src="/maskable_icon.png"
                   alt=""
                 />
-                <p>MessageVerse</p>
+                <p className="hidden md:block">MessageVerse</p>
               </a>
               <div
                 className="flex md:hidden"
