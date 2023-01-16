@@ -13,8 +13,15 @@ export default function UpdateProfile() {
   }, [user]);
 
   return (
-    <form className="space-y-8 divide-y divide-gray-200 md:px-40">
-      <div className="space-y-8 divide-y divide-gray-200">
+    <form className="w-full space-y-8 divide-y divide-gray-200 shadow-sm md:px-40">
+      <div className="space-y-8 divide-y divide-gray-200 py-4  ">
+        <div className="flex w-full flex-col items-center justify-center gap-2">
+          <img src={user.image} className="h-20 rounded-full" alt="" />
+          <div className="flex w-full flex-col items-center justify-center">
+            <p className="text-lg font-semibold">{user.name}</p>
+            <p className="text-sm font-semibold">{user.email}</p>
+          </div>
+        </div>
         <div className="pt-8">
           <div>
             <h3 className="text-lg font-medium leading-6 text-gray-900">

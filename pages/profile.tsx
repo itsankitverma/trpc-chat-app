@@ -10,9 +10,9 @@ export default function Handle() {
   }
 
   return (
-    <div>
+    <div className="flex w-full items-center justify-center">
       {/* <Appbar /> */}
-      <div className="px-5 md:max-w-4xl">
+      <div className="px-5 md:max-w-4xl ">
         <UpdateProfile />
       </div>
     </div>
